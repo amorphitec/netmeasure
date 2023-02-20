@@ -1,13 +1,20 @@
-import collections
-import sys
+import typing
+from dataclasses import dataclass
 
-import six
+from measurement.results import MeasurementResult
+from measurement.units import TimeUnit, StorageUnit, RatioUnit, NetworkUnit
 
-if six.PY3 and not sys.version_info.minor == 5:  # All python 3 expect for 3.5
-    from .results_py3 import *
-else:
-    WebpageMeasurementResult = collections.namedtuple(
-        "WebpageMeasurementResult",
-        "id errors url download_rate download_rate_unit download_size download_size_unit "
-        "asset_count failed_asset_downloads elapsed_time elapsed_time_unit",
-    )
+
+@dataclass(frozen=True)
+class WebpageMeasurementResult(MeasurementResult):
+    """Encapsulates the results from a Webpage download measurement."""
+
+    url: typing.Optional[str]
+    download_rate: typing.Optional[float]
+    download_rate_unit: typing.Optional[NetworkUnit]
+    download_size: typing.Optional[float]
+    download_size_unit: typing.Optional[StorageUnit]
+    asset_count: typing.Optional[int]
+    failed_asset_downloads: typing.Optional[int]
+    elapsed_time: typing.Optional[float]
+    elapsed_time_unit: typing.Optional[TimeUnit]

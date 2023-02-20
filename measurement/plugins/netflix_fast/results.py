@@ -1,19 +1,37 @@
-import collections
-import sys
+import typing
+from dataclasses import dataclass
 
-import six
+from measurement.results import MeasurementResult
+from measurement.units import TimeUnit, StorageUnit, RatioUnit, NetworkUnit
 
-if six.PY3 and not sys.version_info.minor == 5:  # All python 3 expect for 3.5
-    from .results_py3 import *
-else:
-    NetflixFastMeasurementResult = collections.namedtuple(
-        "NetflixFastMeasurementResult",
-        "id errors download_rate download_rate_unit download_size download_size_unit"
-        " asn ip isp city country urlcount reason_terminated ",
-    )
 
-    NetflixFastThreadResult = collections.namedtuple(
-        "NetflixFastThreadResult",
-        "id errors host download_size download_size_unit download_rate download_rate_unit"
-        " elapsed_time elapsed_time_unit city country ",
-    )
+@dataclass(frozen=True)
+class NetflixFastMeasurementResult(MeasurementResult):
+    """Encapsulates the results from a NetflixFast measurement."""
+
+    download_rate: typing.Optional[float]
+    download_rate_unit: typing.Optional[NetworkUnit]
+    download_size: typing.Optional[float]
+    download_size_unit: typing.Optional[StorageUnit]
+    asn: typing.Optional[str]
+    ip: typing.Optional[str]
+    isp: typing.Optional[str]
+    city: typing.Optional[str]
+    country: typing.Optional[str]
+    urlcount: typing.Optional[int]
+    reason_terminated: typing.Optional[str]
+
+
+@dataclass(frozen=True)
+class NetflixFastThreadResult(MeasurementResult):
+    """Encapsulates the latency test results from an individual download url."""
+
+    host: str
+    download_size: typing.Optional[float]
+    download_size_unit: typing.Optional[StorageUnit]
+    download_rate: typing.Optional[float]
+    download_rate_unit: typing.Optional[NetworkUnit]
+    elapsed_time: typing.Optional[float]
+    elapsed_time_unit: typing.Optional[TimeUnit]
+    city: typing.Optional[str]
+    country: typing.Optional[str]

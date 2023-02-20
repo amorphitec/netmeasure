@@ -1,19 +1,47 @@
-import collections
-import sys
+import typing
+from dataclasses import dataclass
 
-import six
+from measurement.results import MeasurementResult
+from measurement.units import TimeUnit, StorageUnit, RatioUnit
 
-if six.PY3 and not sys.version_info.minor == 5:  # All python 3 expect for 3.5
-    from .results_py3 import *
-else:
-    LatencyMeasurementResult = collections.namedtuple(
-        "LatencyMeasurementResult",
-        "id errors host minimum_latency average_latency maximum_latency median_deviation "
-        "packets_transmitted packets_received packets_lost packets_lost_unit elapsed_time elapsed_time_unit",
-    )
 
-    LatencyIndividualMeasurementResult = collections.namedtuple(
-        "LatencyIndividualMeasurementResult",
-        "id errors host packet_size packet_size_unit reverse_dns_address ip_address"
-        " icmp_sequence time_to_live elapsed_time elapsed_time_unit",
-    )
+@dataclass(frozen=True)
+class LatencyMeasurementResult(MeasurementResult):
+    """Encapsulates the results from a latency measurement.
+
+    :param host: The host that was used to perform the latency
+    measurement.
+    :param minimum_latency: The minimum amount of latency witnessed
+    while performing the measurement.
+    :param average_latency: The average amount of latency witnessed
+    while performing the measurement.
+    :param maximum_latency: The maximum amount of latency witnessed
+    while performing the measurement.
+    :param median_deviation: The median deviation witnessed across
+    the measurement.
+    """
+
+    host: str
+    minimum_latency: typing.Optional[float]
+    average_latency: typing.Optional[float]
+    maximum_latency: typing.Optional[float]
+    median_deviation: typing.Optional[float]
+    packets_transmitted: typing.Optional[int]
+    packets_received: typing.Optional[int]
+    packets_lost: typing.Optional[float]
+    packets_lost_unit: typing.Optional[RatioUnit]
+    elapsed_time: typing.Optional[float]
+    elapsed_time_unit: typing.Optional[TimeUnit]
+
+
+@dataclass(frozen=True)
+class LatencyIndividualMeasurementResult(MeasurementResult):
+    host: str
+    packet_size: typing.Optional[float]
+    packet_size_unit: typing.Optional[StorageUnit]
+    reverse_dns_address: typing.Optional[str]
+    ip_address: typing.Optional[str]
+    icmp_sequence: typing.Optional[int]
+    time_to_live: typing.Optional[float]
+    elapsed_time: typing.Optional[float]
+    elapsed_time_unit: typing.Optional[TimeUnit]

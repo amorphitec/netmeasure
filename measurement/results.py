@@ -1,10 +1,35 @@
-import collections
-import sys
+import typing
+from dataclasses import dataclass
 
-import six
 
-if six.PY3 and not sys.version_info.minor == 5:  # All python 3 expect for 3.5
-    from .results_py3 import *
-else:
-    Error = collections.namedtuple("Error", "key description traceback")
-    MeasurementResult = collections.namedtuple("MeasurementResult", "id errors")
+@dataclass(frozen=True)
+class Error:
+    """An error format for use with `MeasurementResult`.
+
+    This data class is designed to be used with the `MeasurementResult`
+    data class and its' subclasses to describe any errors that
+    occurred in a measurement.
+
+    :param key: A key to describe the error type.
+    :param description: A human readable description of the encountered
+    error.
+    :param traceback: The traceback or outputs of a command that caused
+    the error to occur.
+    """
+
+    key: str
+    description: str
+    traceback: str
+
+
+@dataclass(frozen=True)
+class MeasurementResult:
+    """ "A standard interface for measurement results
+
+    :param id: A unique identifier for the measurement result.
+    :param errors: The errors that occurred while attempting to take
+    the measurement.
+    """
+
+    id: str
+    errors: typing.List[Error]
