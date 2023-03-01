@@ -2,16 +2,22 @@
 [![PyPI Supported Python Versions](https://img.shields.io/pypi/pyversions/honestybox-measurement.svg)](https://pypi.python.org/pypi/honestybox-measurement/)
 [![GitHub license](https://img.shields.io/github/license/honesty-box/honestybox-measurement)](https://github.com/honesty-box/honestybox-measurement/blob/master/LICENSE)
 [![GitHub Actions (Tests)](https://github.com/honesty-box/honestybox-measurement/workflows/Tests/badge.svg)](https://github.com/honesty-box/honestybox-measurement)
-[![GitHub Actions (Quality)](https://github.com/honesty-box/honestybox-measurement/workflows/Quality/badge.svg)](https://github.com/honesty-box/honestybox-measurement)
-[![Honesty Box Twitter](https://img.shields.io/twitter/follow/honestybox?style=social)](https://twitter.com/honestybox)
 
-# honestybox-measurement
+# Netmeasure
 
-A framework for measuring things and producing structured results.
+A library for measuring Internet connection quality in a structured and consistent way.
+
+## Purpose
+
+There are a variety of services, clients, tools, and methodologies used to measure Internet connection quality. Each of these has its own advantages, flaws, biases and units of measurement.
+
+Netmeasure brings these together in a single measurement library with a consistent interface and explicitly-defined units. Being open-source ensures transparent methodology and allows for ongoing community improvement.
+
+## Usage
 
 ## Requirements
 
-`honestybox-measurement` supports Python 3.5 to Python 3.8 inclusively.
+`netmeasurem` supports Python 3.7 to Python 3.11 inclusively.
 
 ## Development
 
@@ -24,63 +30,6 @@ on `commit` and `push`. Install these hooks like so:
 $ pre-commit install && pre-commit install -t pre-push
 asd
 ```
-
-## Releases
-
-To ensure releases are always built on the latest codebase, *changes are only ever merged to `release` from `master`*.
-
-### Creating a release
-1. Ensure that master is up to date:
-
-    ```shell script
-    $ git checkout master
-    $ git pull origin
-    ```
-
-2. Switch to release and ensure it is up to date:
-
-    ```shell script
-    $ git checkout release
-    $ git pull origin
-    ```
-
-3. Merge from master:
-
-    ```shell script
-    $ git merge master
-    ```
-
-4. Add a new release to `CHANGELOG.md` and include all changes in `[Unreleased]`.
-
-5. Update version number in `pyproject.toml`
-
-6. Commit the changes to the `release` branch with comment `Release <version number>`
-
-    ```shell script
-    $ git add CHANGELOG.md pyproject.toml
-    $ git commit -m 'Release v<x>.<y>.<z>`
-    ```
-
-7. Tag the commit with the release number:
-
-    ```shell script
-    $ git tag v<x>.<y>.<z>
-    ```
-
-8. Push the commit and tags upstream:
-
-    ```shell script
-    $ git push && git push --tags
-    ```
-
-9. Merge changes into master and push upstream:
-
-    ```shell script
-    $ git checkout master
-    $ git merge release
-    $ git push
-    ```
-
 
 ### Publishing a release
 
