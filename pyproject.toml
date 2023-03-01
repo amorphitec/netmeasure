@@ -1,19 +1,19 @@
 [tool.poetry]
-name = "honestybox-measurement"
-version = "1.1.0"
-description = "A framework for measuring things and producing structured results."
+name = "netmeasure"
+version = "1.0"
+description = "A tool for measuring Internet connection quality in a structured way."
 authors = [
     "James Stewart <james@amorphitec.io>",
     "Stuart Dines <me@stuartdines.com>",
-    "James Johnson <james.johnston@honestybox.com.au>"
+    "James Johnson <jamesaj2323@gmail.com>"
 ]
 maintainers = [
-    "Honesty Box <engineering@honestybox.com.au>",
+    "James Stewart <james@amorphitec.io>",
 ]
 packages = [
     { include = "measurement" },
 ]
-repository = "https://github.com/honesty-box/honestybox-measurement/"
+repository = "https://github.com/amorphitec/netmeasure"
 readme = "README.md"
 
 [tool.poetry.dependencies]
