@@ -15,12 +15,12 @@ class NetworkUnit(Enum):
 class StorageUnit(Enum):
     """Anticipated units for a storage style of measurement."""
 
-    bit = "bit"
-    bytes = "B"
-    kilobit = "kbit"
-    megabit = "Mbit"
-    kibibit = "Kibit"
-    mebibit = "Mibit"
+    bit = "b"
+    byte = "B"
+    kilobit = "kb"
+    megabit = "Mb"
+    kibibit = "Kib"
+    mebibit = "Mib"
     kilobyte = "kB"
     megabyte = "MB"
     kibibyte = "KiB"
