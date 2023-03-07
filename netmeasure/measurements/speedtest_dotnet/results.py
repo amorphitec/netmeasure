@@ -6,8 +6,8 @@ from netmeasure.units import TimeUnit, StorageUnit, RatioUnit, NetworkUnit
 
 
 @dataclass(frozen=True)
-class SpeedtestdotnetMeasurementResult(MeasurementResult):
-    """Encapsulates the results from a speedtestdotnet measurement.
+class SpeedtestDotnetMeasurementResult(MeasurementResult):
+    """Encapsulates the results from a speedtest_dotnet measurement.
 
     :param download_rate: The measured download rate.
     :param download_rate_unit: The unit of measurement of `download_rate`.
@@ -17,13 +17,13 @@ class SpeedtestdotnetMeasurementResult(MeasurementResult):
     :param data_received_unit: The unit of measurement of `data_received`
     :param latency: The measured latency.
     :param server_name: The name of the speedtest.net server used to perform
-    the speedtestdotnet measurement.
+    the speedtest_dotnet measurement.
     :param server_id: The id of the speedtest.net server used to perform the
-    speedtestdotnet measurement.
+    speedtest_dotnet measurement.
     :param server_sponsor: The sponsor of the speedtest.net server used to
-    perform the speedtestdotnet measurement.
+    perform the speedtest_dotnet measurement.
     :param server_host: The host name of the speedtest.net server used to
-    perform the speedtestdotnet measurement.
+    perform the speedtest_dotnet measurement.
     """
 
     download_rate: typing.Optional[float]

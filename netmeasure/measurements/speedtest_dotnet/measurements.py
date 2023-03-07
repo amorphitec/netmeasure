@@ -6,7 +6,7 @@ from validators import ValidationFailure
 import speedtest
 
 from netmeasure.measurements.base.measurements import BaseMeasurement
-from netmeasure.measurements.speedtestdotnet.results import SpeedtestdotnetMeasurementResult
+from netmeasure.measurements.speedtest_dotnet.results import SpeedtestDotnetMeasurementResult
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
 
@@ -19,9 +19,9 @@ SPEEDTEST_ERRORS = {
 }
 
 
-class SpeedtestdotnetMeasurement(BaseMeasurement):
+class SpeedtestDotnetMeasurement(BaseMeasurement):
     def __init__(self, id, servers=None):
-        super(SpeedtestdotnetMeasurement, self).__init__(id=id)
+        super(SpeedtestDotnetMeasurement, self).__init__(id=id)
         self.id = id
         self.servers = servers
 
@@ -52,7 +52,7 @@ class SpeedtestdotnetMeasurement(BaseMeasurement):
 
         results_dict = s.results.dict()
         try:
-            return SpeedtestdotnetMeasurementResult(
+            return SpeedtestDotnetMeasurementResult(
                 id=self.id,
                 download_rate=float(results_dict["download"]),
                 download_rate_unit=NetworkUnit("bit/s"),
@@ -71,7 +71,7 @@ class SpeedtestdotnetMeasurement(BaseMeasurement):
             return self._get_speedtest_error("speedtest-convert", traceback=str(e))
 
     def _get_speedtest_error(self, key, traceback):
-        return SpeedtestdotnetMeasurementResult(
+        return SpeedtestDotnetMeasurementResult(
             id=self.id,
             download_rate=None,
             download_rate_unit=None,

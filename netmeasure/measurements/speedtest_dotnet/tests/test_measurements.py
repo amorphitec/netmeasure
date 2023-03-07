@@ -3,22 +3,22 @@ from unittest import TestCase, mock
 
 import speedtest
 
-from netmeasure.measurements.speedtestdotnet.measurements import (
-    SpeedtestdotnetMeasurement,
+from netmeasure.measurements.speedtest_dotnet.measurements import (
+    SpeedtestDotnetMeasurement,
     SPEEDTEST_ERRORS,
 )
-from netmeasure.measurements.speedtestdotnet.results import SpeedtestdotnetMeasurementResult
+from netmeasure.measurements.speedtest_dotnet.results import SpeedtestDotnetMeasurementResult
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
 
 
-class SpeedtestdotnetTestCase(TestCase):
+class SpeedtestDotnetTestCase(TestCase):
     maxDiff = None
 
     def setUp(self) -> None:
         super().setUp()
         self.id = "1"
-        self.stdnm = SpeedtestdotnetMeasurement("1")
+        self.stdnm = SpeedtestDotnetMeasurement("1")
         self.sample_results_dict_valid = {
             "download": 93116804.64881887,
             "upload": 19256654.06593738,
@@ -54,7 +54,7 @@ class SpeedtestdotnetTestCase(TestCase):
                 "country": "AU",
             },
         }
-        self.sample_result_valid = SpeedtestdotnetMeasurementResult(
+        self.sample_result_valid = SpeedtestDotnetMeasurementResult(
             id=self.id,
             download_rate=93116804.64881887,
             download_rate_unit=NetworkUnit("bit/s"),
@@ -69,7 +69,7 @@ class SpeedtestdotnetTestCase(TestCase):
             server_host="fake.site:8080",
             errors=[],
         )
-        self.sample_result_configretrieval = SpeedtestdotnetMeasurementResult(
+        self.sample_result_configretrieval = SpeedtestDotnetMeasurementResult(
             id=self.id,
             download_rate=None,
             download_rate_unit=None,
@@ -90,7 +90,7 @@ class SpeedtestdotnetTestCase(TestCase):
                 )
             ],
         )
-        self.sample_result_bestserver = SpeedtestdotnetMeasurementResult(
+        self.sample_result_bestserver = SpeedtestDotnetMeasurementResult(
             id=self.id,
             download_rate=None,
             download_rate_unit=None,
@@ -111,7 +111,7 @@ class SpeedtestdotnetTestCase(TestCase):
                 )
             ],
         )
-        self.sample_result_share = SpeedtestdotnetMeasurementResult(
+        self.sample_result_share = SpeedtestDotnetMeasurementResult(
             id=self.id,
             download_rate=None,
             download_rate_unit=None,
