@@ -11,13 +11,27 @@ A library for measuring Internet connection quality in a structured and consiste
 
 There are a variety of services, clients, tools, and methodologies used to measure Internet connection quality. Each of these has its own advantages, flaws, biases and units of measurement.
 
-Netmeasure brings these together in a single measurement library with a consistent interface and explicitly-defined units. Being open-source ensures transparent methodology and allows for ongoing community improvement.
+Netmeasure brings together a variety of Internet connection quality measurements in a single library with a consistent interface and explicitly-defined units.
+
+An open-source license ensures methodology is transparent and open to ongoing community improvement.
+
+## Measurements
+
+- `file_download` - measures download of a file from a given endpoint using the wget application
+- `ip_route` - measures network hops to a given endpoint using the scapy library
+- `latency` - measures latency to a given endpoint using the ping application
+- `netflix_fast` - measures download from the netflix fast service using the requests library
+- `speedtest_dotnet` - measures download from, upload to and latency to the speedtest.net service using the speedtest library
+- `webpage_download` - measures download of a given web page and its associated assets using the requests library
+- `youtube_download` - measures download of a given youtube video using the youtube-dl library
 
 ## Usage
 
+...
+
 ## Requirements
 
-`netmeasurem` supports Python 3.7 to Python 3.11 inclusively.
+`netmeasure` supports Python 3.7 to Python 3.11 inclusively.
 
 ## Development
 
