@@ -6,7 +6,7 @@ from netmeasure.units import TimeUnit, StorageUnit, RatioUnit, NetworkUnit
 
 
 @dataclass(frozen=True)
-class YouTubeMeasurementResult(MeasurementResult):
+class YoutubeDownloadMeasurementResult(MeasurementResult):
     """Encapsulates the results from a YouTube measurement."""
 
     download_rate: typing.Optional[float]

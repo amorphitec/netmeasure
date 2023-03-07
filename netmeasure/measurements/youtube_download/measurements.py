@@ -12,11 +12,11 @@ from validators import ValidationFailure
 from netmeasure.measurements.base.measurements import BaseMeasurement
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
-from netmeasure.measurements.youtube.results import YouTubeMeasurementResult
+from netmeasure.measurements.youtube_download.results import YoutubeDownloadMeasurementResult
 
 YOUTUBE_ERRORS = {
     "youtube-download": "Download utility could not download file",
-    "youtube-extractor": "Unable to extract info from youtube",
+    "youtube-extractor": "Unable to extract info from youtube_download",
     "youtube-url": "Could not recognise URL",
     "youtube-attribute": "Could not parse attributes from progress dict",
     "youtube-progress_length": "Recorded progress dicts were too short",
@@ -26,9 +26,9 @@ YOUTUBE_ERRORS = {
 }
 
 
-class YouTubeMeasurement(BaseMeasurement):
+class YoutubeDownloadMeasurement(BaseMeasurement):
     def __init__(self, id, url):
-        super(YouTubeMeasurement, self).__init__(id=id)
+        super(YoutubeDownloadMeasurement, self).__init__(id=id)
         validated_url = validators.url(url)
         if isinstance(validated_url, ValidationFailure):
             raise ValueError("`{url}` is not a valid url".format(url=url))
@@ -37,9 +37,9 @@ class YouTubeMeasurement(BaseMeasurement):
         self.progress_dicts = []
 
     def measure(self):
-        return self._get_youtube_result(self.url)
+        return self._get_youtube_download_result(self.url)
 
-    def _get_youtube_result(self, url):
+    def _get_youtube_download_result(self, url):
         # Unique filename from process ID and timestamp
         file_dir = "{}/youtube-dl_{}".format(tempfile.gettempdir(), os.getpid())
         filename = "{}/youtube-dl_{}/{}".format(
@@ -54,9 +54,9 @@ class YouTubeMeasurement(BaseMeasurement):
         try:
             ydl.extract_info(url)
         except youtube_dl.utils.ExtractorError as e:
-            return self._get_youtube_error("youtube-extractor", traceback=str(e))
+            return self._get_youtube_download_error("youtube-extractor", traceback=str(e))
         except youtube_dl.utils.DownloadError as e:
-            return self._get_youtube_error("youtube-download", traceback=str(e))
+            return self._get_youtube_download_error("youtube-download", traceback=str(e))
         try:
             # Extract size and duration from final progress step
             download_size = self.progress_dicts[-1]["total_bytes"]
@@ -65,11 +65,11 @@ class YouTubeMeasurement(BaseMeasurement):
             # Speed is only reported in non-final steps
             download_rate = self.progress_dicts[-2]["speed"] * 8
         except KeyError:
-            return self._get_youtube_error(
+            return self._get_youtube_download_error(
                 "youtube-attribute", traceback=str(self.progress_dicts)
             )
         except IndexError:
-            return self._get_youtube_error(
+            return self._get_youtube_download_error(
                 "youtube-progress_length", traceback=str(self.progress_dicts)
             )
 
@@ -77,9 +77,9 @@ class YouTubeMeasurement(BaseMeasurement):
             # Remove the created temp directory and all contents
             shutil.rmtree(file_dir)
         except FileNotFoundError as e:
-            return self._get_youtube_error("youtube-no_directory", traceback=str(e))
+            return self._get_youtube_download_error("youtube-no_directory", traceback=str(e))
 
-        return YouTubeMeasurementResult(
+        return YoutubeDownloadMeasurementResult(
             id=self.id,
             url=self.url,
             download_rate=download_rate,
@@ -98,8 +98,8 @@ class YouTubeMeasurement(BaseMeasurement):
         """
         self.progress_dicts.append(s)
 
-    def _get_youtube_error(self, key, traceback):
-        return YouTubeMeasurementResult(
+    def _get_youtube_download_error(self, key, traceback):
+        return YoutubeDownloadMeasurementResult(
             id=self.id,
             url=self.url,
             download_rate_unit=None,
