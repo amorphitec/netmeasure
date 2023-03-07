@@ -17,13 +17,13 @@ An open-source license ensures methodology is transparent and open to ongoing co
 
 ## Measurements
 
-- `file_download` - measures download of a file from a given endpoint using the wget application
-- `ip_route` - measures network hops to a given endpoint using the scapy library
-- `latency` - measures latency to a given endpoint using the ping application
-- `netflix_fast` - measures download from the netflix fast service using the requests library
-- `speedtest_dotnet` - measures download from, upload to and latency to the speedtest.net service using the speedtest library
-- `webpage_download` - measures download of a given web page and its associated assets using the requests library
-- `youtube_download` - measures download of a given youtube video using the youtube-dl library
+- `file_download` - measures download of a file from a given endpoint using the [wget](https://www.gnu.org/software/wget/) application.
+- `ip_route` - measures network hops to a given endpoint using the [scapy](https://scapy.net/) library.
+- `latency` - measures latency to a given endpoint using the [ping](https://en.wikipedia.org/wiki/Ping_%28networking_utility%29) application.
+- `netflix_fast` - measures download from the [netflix fast](https://fast.com/) service using the [requests](https://requests.readthedocs.io/en/latest/) library.
+- `speedtest_dotnet` - measures download from, upload to and latency to the [speedtest.net](https://www.speedtest.net/) service using the [speedtest-cli](https://pypi.org/project/speedtest-cli/) library.
+- `webpage_download` - measures download of a given web page and its associated assets using the [requests](https://requests.readthedocs.io/en/latest/) library.
+- `youtube_download` - measures download of a given [youtube](https://www.youtube.com/) video using the [youtube-dl](https://youtube-dl.org/) library.
 
 ## Usage
 
