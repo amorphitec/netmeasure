@@ -32,7 +32,7 @@ from netmeasure.measurements.base.measurements import BaseMeasurement
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
 from netmeasure.measurements.latency.measurements import LatencyMeasurement
-from netmeasure.measurements.download_speed.measurements import DownloadSpeedMeasurement
+from netmeasure.measurements.file_download.measurements import FileDownloadMeasurement
 from netmeasure.measurements.netflix_fast.results import (
     NetflixFastMeasurementResult,
     NetflixFastThreadResult,

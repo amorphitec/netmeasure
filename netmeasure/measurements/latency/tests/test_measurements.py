@@ -10,7 +10,7 @@ from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit
 
 
-class DownloadSpeedMeasurementLatencyTestCase(TestCase):
+class FileDownloadMeasurementLatencyTestCase(TestCase):
     maxDiff = None
 
     def setUp(self) -> None:

@@ -6,7 +6,7 @@ from six.moves.urllib.parse import urlparse
 from validators import ValidationFailure
 
 from netmeasure.measurements.base.measurements import BaseMeasurement
-from netmeasure.measurements.download_speed.results import DownloadSpeedMeasurementResult
+from netmeasure.measurements.file_download.results import FileDownloadMeasurementResult
 from netmeasure.measurements.latency.measurements import LatencyMeasurement
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import NetworkUnit, StorageUnit
@@ -32,7 +32,7 @@ WGET_DOWNLOAD_RATE_UNIT_MAP = {
 }
 
 
-class DownloadSpeedMeasurement(BaseMeasurement):
+class FileDownloadMeasurement(BaseMeasurement):
     """A measurement designed to test download speed."""
 
     def __init__(self, id, urls, count=4, download_timeout=180):
@@ -46,7 +46,7 @@ class DownloadSpeedMeasurement(BaseMeasurement):
         :param download_timeout: An integer describing the number of
         seconds for the test to last. 0 means no timeout.
         """
-        super(DownloadSpeedMeasurement, self).__init__(id=id)
+        super(FileDownloadMeasurement, self).__init__(id=id)
         if len(urls) < 1:
             raise ValueError("At least one url must be provided.")
         for url in urls:
@@ -155,7 +155,7 @@ class DownloadSpeedMeasurement(BaseMeasurement):
             return self._get_wget_error(
                 "wget-download-size", url, traceback=wget_out.stderr
             )
-        return DownloadSpeedMeasurementResult(
+        return FileDownloadMeasurementResult(
             id=self.id,
             url=url,
             download_rate_unit=download_rate_unit,
@@ -166,7 +166,7 @@ class DownloadSpeedMeasurement(BaseMeasurement):
         )
 
     def _get_wget_error(self, key, url, traceback):
-        return DownloadSpeedMeasurementResult(
+        return FileDownloadMeasurementResult(
             id=self.id,
             url=url,
             download_rate_unit=None,

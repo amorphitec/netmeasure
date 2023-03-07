@@ -5,10 +5,10 @@ import subprocess
 
 from netmeasure.measurements.latency.measurements import LatencyMeasurement
 from netmeasure.measurements.base.results import Error
-from netmeasure.measurements.download_speed.measurements import WGET_OUTPUT_REGEX
-from netmeasure.measurements.download_speed.measurements import DownloadSpeedMeasurement
-from netmeasure.measurements.download_speed.measurements import WGET_ERRORS
-from netmeasure.measurements.download_speed.results import DownloadSpeedMeasurementResult
+from netmeasure.measurements.file_download.measurements import WGET_OUTPUT_REGEX
+from netmeasure.measurements.file_download.measurements import FileDownloadMeasurement
+from netmeasure.measurements.file_download.measurements import WGET_ERRORS
+from netmeasure.measurements.file_download.results import FileDownloadMeasurementResult
 from netmeasure.measurements.latency.results import LatencyMeasurementResult
 
 from netmeasure.units import NetworkUnit, StorageUnit
@@ -29,16 +29,16 @@ def test_wget_output_regex_accepts_anticipated_format():
     }
 
 
-class DownloadSpeedMeasurementCreationTestCase(TestCase):
+class FileDownloadMeasurementCreationTestCase(TestCase):
     def test_invalid_hosts(self, *args):
         self.assertRaises(
-            ValueError, DownloadSpeedMeasurement, "test", ["invalid..host"]
+            ValueError, FileDownloadMeasurement, "test", ["invalid..host"]
         )
 
     def test_invalid_count(self, *args):
         self.assertRaises(
             TypeError,
-            DownloadSpeedMeasurement,
+            FileDownloadMeasurement,
             "test",
             ["http://validfakeurl.com"],
             count="invalid-count",
@@ -47,20 +47,20 @@ class DownloadSpeedMeasurementCreationTestCase(TestCase):
     def test_invalid_negative_count(self, *args):
         self.assertRaises(
             ValueError,
-            DownloadSpeedMeasurement,
+            FileDownloadMeasurement,
             "test",
             ["http://validfakeurl.com"],
             count=-2,
         )
 
 
-class DownloadSpeedMeasurementWgetTestCase(TestCase):
+class FileDownloadMeasurementWgetTestCase(TestCase):
     def setUp(self) -> None:
         super().setUp()
-        self.measurement = DownloadSpeedMeasurement(
+        self.measurement = FileDownloadMeasurement(
             "test", ["https://validfakehost.com/test"]
         )
-        self.valid_wget_kibit_sec = DownloadSpeedMeasurementResult(
+        self.valid_wget_kibit_sec = FileDownloadMeasurementResult(
             id="test",
             url="http://validfakehost.com/test",
             download_rate_unit=NetworkUnit("Kibit/s"),
@@ -69,7 +69,7 @@ class DownloadSpeedMeasurementWgetTestCase(TestCase):
             download_size_unit=StorageUnit.bit,
             errors=[],
         )
-        self.valid_wget_mibit_sec = DownloadSpeedMeasurementResult(
+        self.valid_wget_mibit_sec = FileDownloadMeasurementResult(
             id="test",
             url="http://validfakehost.com/test",
             download_rate_unit=NetworkUnit("Mibit/s"),
@@ -78,7 +78,7 @@ class DownloadSpeedMeasurementWgetTestCase(TestCase):
             download_size_unit=StorageUnit.bit,
             errors=[],
         )
-        self.invalid_wget_mibit_sec = DownloadSpeedMeasurementResult(
+        self.invalid_wget_mibit_sec = FileDownloadMeasurementResult(
             id="test",
             url="http://validfakehost.com/test",
             download_rate_unit=None,
@@ -93,7 +93,7 @@ class DownloadSpeedMeasurementWgetTestCase(TestCase):
                 )
             ],
         )
-        self.invalid_wget_download_unit = DownloadSpeedMeasurementResult(
+        self.invalid_wget_download_unit = FileDownloadMeasurementResult(
             id="test",
             url="http://validfakehost.com/test",
             download_rate_unit=None,
@@ -108,7 +108,7 @@ class DownloadSpeedMeasurementWgetTestCase(TestCase):
                 )
             ],
         )
-        self.invalid_regex = DownloadSpeedMeasurementResult(
+        self.invalid_regex = FileDownloadMeasurementResult(
             id="test",
             url="http://validfakehost.com/test",
             download_rate_unit=None,
@@ -200,7 +200,7 @@ class DownloadSpeedMeasurementWgetTestCase(TestCase):
         )
 
 
-class DownloadSpeedMeasurementClosestServerTestCase(TestCase):
+class FileDownloadMeasurementClosestServerTestCase(TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.example_urls = [
@@ -208,7 +208,7 @@ class DownloadSpeedMeasurementClosestServerTestCase(TestCase):
             "http://n2-validfakehost.com",
             "http://n3-validfakehost.com",
         ]
-        self.measurement = DownloadSpeedMeasurement("test", self.example_urls)
+        self.measurement = FileDownloadMeasurement("test", self.example_urls)
         print("asdf")
 
     @mock.patch.object(LatencyMeasurement, "measure")

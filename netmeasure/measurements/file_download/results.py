@@ -6,7 +6,7 @@ from netmeasure.units import NetworkUnit, StorageUnit
 
 
 @dataclass(frozen=True)
-class DownloadSpeedMeasurementResult(MeasurementResult):
+class FileDownloadMeasurementResult(MeasurementResult):
     """Encapsulates the results from a download speed measurement.
 
     :param url: The URL that was used to perform the download speed
