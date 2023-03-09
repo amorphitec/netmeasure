@@ -31,7 +31,7 @@ An open-source license ensures methodology is transparent and open to ongoing co
 
 ## Requirements
 
-`netmeasure` supports Python 3.7 to Python 3.11 inclusively.
+`netmeasure` supports Python 3.8 to Python 3.11 inclusively.
 
 ## Development
 

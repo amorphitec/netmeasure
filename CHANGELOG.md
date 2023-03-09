@@ -15,6 +15,9 @@
 ### Fixed
 - Inconsistent storage unit names
 
+### Removed
+- Support for Python 3.7
+
 ## [1.1.0] (2020-08-23)
 ### Changed
 - Rename trace to route in ip_route result

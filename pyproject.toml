@@ -17,7 +17,7 @@ repository = "https://github.com/amorphitec/netmeasure"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.7, <4"
+python = ">=3.8, <4"
 validators = "^0.20"
 speedtest-cli = "^2.1"
 requests = "^2.28"
