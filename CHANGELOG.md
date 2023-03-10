@@ -3,6 +3,7 @@
 ### Added
 - Add webpage measurement
 - Measurement details to README
+- CLI for all measurements
 
 ### Changed
 - Separate netflix_fast LatencyMeasurement into a new result
