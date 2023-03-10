@@ -6,7 +6,7 @@ from netmeasure.units import TimeUnit, StorageUnit, RatioUnit, NetworkUnit
 
 
 @dataclass(frozen=True)
-class WebpageMeasurementResult(MeasurementResult):
+class WebpageDownloadMeasurementResult(MeasurementResult):
     """Encapsulates the results from a Webpage download measurement."""
 
     url: typing.Optional[str]

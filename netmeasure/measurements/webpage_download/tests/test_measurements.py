@@ -7,20 +7,20 @@ import subprocess
 
 from netmeasure.measurements.latency.measurements import LatencyMeasurement
 from netmeasure.measurements.base.results import Error
-from netmeasure.measurements.webpage_download.measurements import WebpageMeasurement
+from netmeasure.measurements.webpage_download.measurements import WebpageDownloadMeasurement
 from netmeasure.measurements.webpage_download.measurements import WEB_ERRORS
 
-from netmeasure.measurements.webpage_download.results import WebpageMeasurementResult
+from netmeasure.measurements.webpage_download.results import WebpageDownloadMeasurementResult
 from netmeasure.measurements.latency.results import LatencyMeasurementResult
 
 from netmeasure.units import NetworkUnit, StorageUnit, TimeUnit, RatioUnit
 
 
-class WebpageMeasurementResultsTestCase(TestCase):
+class WebpageDownloadMeasurementResultsTestCase(TestCase):
     def setUp(self) -> None:
         super().setUp()
-        self.wpm = WebpageMeasurement("test", "http://validfakehost.com/test")
-        self.simple_webpage_output = WebpageMeasurementResult(
+        self.wpm = WebpageDownloadMeasurement("test", "http://validfakehost.com/test")
+        self.simple_webpage_output = WebpageDownloadMeasurementResult(
             id="test",
             url="http://validfakehost.com/test",
             download_rate=100 / 1.00 * 8,
@@ -38,7 +38,7 @@ class WebpageMeasurementResultsTestCase(TestCase):
             "failed_asset_downloads": 0,
             "completion_time": 2.00,
         }
-        self.get_error_result = WebpageMeasurementResult(
+        self.get_error_result = WebpageDownloadMeasurementResult(
             id="test",
             url="http://validfakehost.com/test",
             download_rate_unit=None,
@@ -59,17 +59,17 @@ class WebpageMeasurementResultsTestCase(TestCase):
         )
 
     @mock.patch(
-        "netmeasure.measurements.webpage_download.measurements.WebpageMeasurement._get_webpage_result"
+        "netmeasure.measurements.webpage_download.measurements.WebpageDownloadMeasurement._get_webpage_result"
     )
     def test_measure(self, mock_get_webpage):
         mock_get_webpage.return_value = self.simple_webpage_output
         self.assertEqual(self.wpm.measure(), self.simple_webpage_output)
 
     @mock.patch(
-        "netmeasure.measurements.webpage_download.measurements.WebpageMeasurement._download_assets"
+        "netmeasure.measurements.webpage_download.measurements.WebpageDownloadMeasurement._download_assets"
     )
     @mock.patch(
-        "netmeasure.measurements.webpage_download.measurements.WebpageMeasurement._parse_html"
+        "netmeasure.measurements.webpage_download.measurements.WebpageDownloadMeasurement._parse_html"
     )
     @mock.patch("requests.Session")
     @mock.patch("time.time")
@@ -95,10 +95,10 @@ class WebpageMeasurementResultsTestCase(TestCase):
         )
 
     @mock.patch(
-        "netmeasure.measurements.webpage_download.measurements.WebpageMeasurement._download_assets"
+        "netmeasure.measurements.webpage_download.measurements.WebpageDownloadMeasurement._download_assets"
     )
     @mock.patch(
-        "netmeasure.measurements.webpage_download.measurements.WebpageMeasurement._parse_html"
+        "netmeasure.measurements.webpage_download.measurements.WebpageDownloadMeasurement._parse_html"
     )
     @mock.patch("requests.Session")
     @mock.patch("time.time")
@@ -122,7 +122,7 @@ class WebpageMeasurementResultsTestCase(TestCase):
 class WebpageHTMLParseTestCase(TestCase):
     def setUp(self) -> None:
         super().setUp()
-        self.wpm = WebpageMeasurement("test", "http://validfakehost.com/test")
+        self.wpm = WebpageDownloadMeasurement("test", "http://validfakehost.com/test")
         self.img_html = (
             '<img alt="HBOX" id="logo" src="/logo/src/name.png"/>\n'
             '<img alt="HBOX" id="another" src="/another/src/name.png"/>\n'
@@ -182,7 +182,7 @@ class WebpageHTMLParseTestCase(TestCase):
 class WebpageAssetDownloadTestCase(TestCase):
     def setUp(self) -> None:
         super().setUp()
-        self.wpm = WebpageMeasurement("test", "http://validfakehost.com/test")
+        self.wpm = WebpageDownloadMeasurement("test", "http://validfakehost.com/test")
         self.all_url_types = [
             "https://validfakehost.com/an_image.jpg",
             "/resources/client/a_stylesheet.css",

@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from netmeasure.measurements.base.measurements import BaseMeasurement
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
-from netmeasure.measurements.webpage_download.results import WebpageMeasurementResult
+from netmeasure.measurements.webpage_download.results import WebpageDownloadMeasurementResult
 from netmeasure.measurements.latency.measurements import LatencyMeasurement
 
 
@@ -31,7 +31,7 @@ VALID_LINK_REL_ATTRIBUTES = [
 ]
 
 
-class WebpageMeasurement(BaseMeasurement):
+class WebpageDownloadMeasurement(BaseMeasurement):
     def __init__(self, id, url, count=4, download_timeout=180):
         self.id = id
         self.url = url
@@ -81,7 +81,7 @@ class WebpageMeasurement(BaseMeasurement):
         download_rate = (primary_download_size + asset_download_size) * 8 / elapsed_time
         failed_asset_downloads = asset_download_metrics["failed_asset_downloads"]
 
-        return WebpageMeasurementResult(
+        return WebpageDownloadMeasurementResult(
             id=self.id,
             url=url,
             download_rate=download_rate,
@@ -154,7 +154,7 @@ class WebpageMeasurement(BaseMeasurement):
         }
 
     def _get_webpage_error(self, key, traceback):
-        return WebpageMeasurementResult(
+        return WebpageDownloadMeasurementResult(
             id=self.id,
             url=self.url,
             download_rate_unit=None,
