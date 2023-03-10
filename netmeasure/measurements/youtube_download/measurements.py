@@ -5,7 +5,7 @@ import tempfile
 import os
 import shutil
 
-import youtube_dl
+import yt_dlp
 import validators
 from validators import ValidationFailure
 
@@ -47,10 +47,11 @@ class YoutubeDownloadMeasurement(BaseMeasurement):
         )
         params = {
             "quiet": True,
+            "no_progress": True,
             "progress_hooks": [self._store_progress_dicts_hook],
             "outtmpl": filename,
         }
-        ydl = youtube_dl.YoutubeDL(params=params)
+        ydl = yt_dlp.YoutubeDL(params=params)
         try:
             ydl.extract_info(url)
         except youtube_dl.utils.ExtractorError as e:
