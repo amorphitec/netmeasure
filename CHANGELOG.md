@@ -1,6 +1,6 @@
 ## Unreleased
 
-## [1.2.3] (2022-03-11)
+## [1.2.4] (2022-03-11)
 
 ### Fixed
 - Update poetry-publish to fix broken pypi publish workflow
