@@ -618,7 +618,6 @@ class ErrorsTestCase(TestCase):
         )
         # JSONDecodeError changed in 3.11
         if sys.version_info < (3, 11):
-            print("not 3.11")
             mock_error_result = NetflixFastMeasurementResult(
                 id=("1"),
                 download_rate=None,
