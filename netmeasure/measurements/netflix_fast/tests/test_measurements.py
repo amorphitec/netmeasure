@@ -612,10 +612,34 @@ class ErrorsTestCase(TestCase):
                 Error(
                     key="netflix-api-parse",
                     description=NETFLIX_ERRORS.get("netflix-api-parse", ""),
-                    traceback="string indices must be integers",
+                    traceback="string indices must be integers, not 'str'",
                 )
             ],
         )
+        # JSONDecodeError changed in 3.11
+        if sys.version_info < (3, 11):
+            print("not 3.11")
+            mock_error_result = NetflixFastMeasurementResult(
+                id=("1"),
+                download_rate=None,
+                download_rate_unit=None,
+                download_size=None,
+                download_size_unit=None,
+                asn=None,
+                ip=None,
+                isp=None,
+                city=None,
+                country=None,
+                urlcount=self.nft.urlcount,
+                reason_terminated=None,
+                errors=[
+                    Error(
+                        key="netflix-api-parse",
+                        description=NETFLIX_ERRORS.get("netflix-api-parse", ""),
+                        traceback="string indices must be integers",
+                    )
+                ],
+            )
         mock_session = mock.MagicMock()
         mock_resp = mock.MagicMock()
         mock_resp.text = '<script src="(This is the script)">'
