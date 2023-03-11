@@ -11,10 +11,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: release
-    - name: Get release HEAD tag
+        ref: master 
+    - name: Get master HEAD tag
       run: echo "::set-env name=RELEASE_HEAD_TAG::$(git tag --points-at HEAD)"
-    - name: Stop if not release HEAD
+    - name: Stop if not master HEAD
       run: exit 1
       if: endsWith(github.ref, env.RELEASE_HEAD_TAG) != true
   publish:

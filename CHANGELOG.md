@@ -1,5 +1,8 @@
 ## Unreleased
 
+### Fixed
+- Use master branch for publish workflow
+
 ## [1.2.1] (2022-03-11)
 
 ### Fixed
