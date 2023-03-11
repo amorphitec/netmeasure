@@ -1,5 +1,10 @@
 ## Unreleased
 
+## [1.2.3] (2022-03-11)
+
+### Fixed
+- Use env vars as per modern pattern in publish workflow
+
 ## [1.2.2] (2022-03-11)
 
 ### Fixed

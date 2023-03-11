@@ -13,7 +13,7 @@ jobs:
       with:
         ref: master
     - name: Get master HEAD tag
-      run: echo "::set-env name=RELEASE_HEAD_TAG::$(git tag --points-at HEAD)"
+      run: echo "RELEASE_HEAD_TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
     - name: Stop if not master HEAD
       run: exit 1
       if: endsWith(github.ref, env.RELEASE_HEAD_TAG) != true
