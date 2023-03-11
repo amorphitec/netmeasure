@@ -1,5 +1,5 @@
 import sys
 
-from . import cli 
+from netmeasure.cli import cli 
 
-sys.exit(cli.cli())
+sys.exit(cli())
