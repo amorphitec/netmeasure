@@ -54,9 +54,9 @@ class YoutubeDownloadMeasurement(BaseMeasurement):
         ydl = yt_dlp.YoutubeDL(params=params)
         try:
             ydl.extract_info(url)
-        except youtube_dl.utils.ExtractorError as e:
+        except yt_dlp.utils.ExtractorError as e:
             return self._get_youtube_download_error("youtube-extractor", traceback=str(e))
-        except youtube_dl.utils.DownloadError as e:
+        except yt_dlp.utils.DownloadError as e:
             return self._get_youtube_download_error("youtube-download", traceback=str(e))
         try:
             # Extract size and duration from final progress step

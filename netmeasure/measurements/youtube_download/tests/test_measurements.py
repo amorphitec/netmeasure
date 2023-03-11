@@ -2,7 +2,7 @@ import sys
 import json
 from unittest import TestCase, mock
 
-import youtube_dl
+import yt_dlp
 
 from netmeasure.measurements.youtube_download.measurements import YoutubeDownloadMeasurement, YOUTUBE_ERRORS
 from netmeasure.measurements.youtube_download.results import YoutubeDownloadMeasurementResult
@@ -11,7 +11,7 @@ from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
 
 """
-Note that the constructors for the youtube_dl errors occasionally add their own text in addition to the passed message!
+Note that the constructors for the yt_dlp errors occasionally add their own text in addition to the passed message!
 """
 
 
@@ -134,7 +134,7 @@ class YoutubeDownloadResultTestCase(TestCase):
                 Error(
                     key="youtube-extractor",
                     description=YOUTUBE_ERRORS.get("youtube-extractor", ""),
-                    traceback="Extraction failed!; please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output.",
+                    traceback="Extraction failed!; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U"
                 )
             ],
         )
@@ -263,7 +263,7 @@ class YoutubeDownloadResultTestCase(TestCase):
     @mock.patch("shutil.rmtree")
     @mock.patch("os.remove")
     @mock.patch("os.rmdir")
-    @mock.patch.object(youtube_dl, "YoutubeDL")
+    @mock.patch.object(yt_dlp, "YoutubeDL")
     def test_youtube_download_result_valid(
         self, mock_YoutubeDL, mock_rmdir, mock_remove, mock_rmtree
     ):
@@ -281,19 +281,22 @@ class YoutubeDownloadResultTestCase(TestCase):
     @mock.patch("shutil.rmtree")
     @mock.patch("os.remove")
     @mock.patch("os.rmdir")
-    @mock.patch.object(youtube_dl, "YoutubeDL")
+    @mock.patch.object(yt_dlp, "YoutubeDL")
     def test_youtube_download_result_extraction_error(
         self, mock_YoutubeDL, mock_rmdir, mock_remove, mock_rmtree
     ):
         self.ytm.progress_dicts = self.mock_progress_dicts
         mock_ydl = mock.MagicMock()
         mock_ydl.extract_info.side_effect = [
-            youtube_dl.utils.ExtractorError("Extraction failed!")
+            yt_dlp.utils.ExtractorError("Extraction failed!")
         ]
         mock_YoutubeDL.return_value = mock_ydl
         mock_rmdir.side_effect = [0]
         mock_remove.side_effect = [0]
         mock_rmtree.side_effect = [0]
+
+        #print(self.ytm._get_youtube_download_result(self.test_url))
+        #print(self.mock_extraction_fail_result)
 
         self.assertEqual(
             self.ytm._get_youtube_download_result(self.test_url),
@@ -303,14 +306,14 @@ class YoutubeDownloadResultTestCase(TestCase):
     @mock.patch("shutil.rmtree")
     @mock.patch("os.remove")
     @mock.patch("os.rmdir")
-    @mock.patch.object(youtube_dl, "YoutubeDL")
+    @mock.patch.object(yt_dlp, "YoutubeDL")
     def test_youtube_download_result_download_error(
         self, mock_YoutubeDL, mock_rmdir, mock_remove, mock_rmtree
     ):
         self.ytm.progress_dicts = self.mock_progress_dicts
         mock_ydl = mock.MagicMock()
         mock_ydl.extract_info.side_effect = [
-            youtube_dl.utils.DownloadError("Download failed!")
+            yt_dlp.utils.DownloadError("Download failed!")
         ]
         mock_YoutubeDL.return_value = mock_ydl
         mock_rmdir.side_effect = [0]
@@ -323,7 +326,7 @@ class YoutubeDownloadResultTestCase(TestCase):
     @mock.patch("shutil.rmtree")
     @mock.patch("os.remove")
     @mock.patch("os.rmdir")
-    @mock.patch.object(youtube_dl, "YoutubeDL")
+    @mock.patch.object(yt_dlp, "YoutubeDL")
     def test_youtube_download_result_attribute_error(
         self, mock_YoutubeDL, mock_rmdir, mock_remove, mock_rmtree
     ):
@@ -342,7 +345,7 @@ class YoutubeDownloadResultTestCase(TestCase):
     @mock.patch("shutil.rmtree")
     @mock.patch("os.remove")
     @mock.patch("os.rmdir")
-    @mock.patch.object(youtube_dl, "YoutubeDL")
+    @mock.patch.object(yt_dlp, "YoutubeDL")
     def test_youtube_download_result_only_final_progress(
         self, mock_YoutubeDL, mock_rmdir, mock_remove, mock_rmtree
     ):
@@ -361,7 +364,7 @@ class YoutubeDownloadResultTestCase(TestCase):
     # @mock.patch("shutil.rmtree")
     # @mock.patch("os.remove")
     # @mock.patch("os.rmdir")
-    # @mock.patch.object(youtube_dl, "YoutubeDL")
+    # @mock.patch.object(yt_dlp, "YoutubeDL")
     # def test_youtube_download_result_remove_file(self, mock_YoutubeDL, mock_rmdir, mock_remove, mock_rmtree):
     #     self.ytm.progress_dicts = self.mock_progress_dicts
     #     mock_ydl = mock.MagicMock()
@@ -379,7 +382,7 @@ class YoutubeDownloadResultTestCase(TestCase):
     @mock.patch("shutil.rmtree")
     @mock.patch("os.remove")
     @mock.patch("os.rmdir")
-    @mock.patch.object(youtube_dl, "YoutubeDL")
+    @mock.patch.object(yt_dlp, "YoutubeDL")
     def test_youtube_download_result_remove_directory(
         self, mock_YoutubeDL, mock_rmdir, mock_remove, mock_rmtree
     ):
@@ -400,7 +403,7 @@ class YoutubeDownloadResultTestCase(TestCase):
     # NOTE: OUTDATED
     # @mock.patch("os.remove")
     # @mock.patch("os.rmdir")
-    # @mock.patch.object(youtube_dl, "YoutubeDL")
+    # @mock.patch.object(yt_dlp, "YoutubeDL")
     # def test_youtube_download_result_remove_directory_nonempty(
     #     self, mock_YoutubeDL, mock_rmdir, mock_remove
     # ):
