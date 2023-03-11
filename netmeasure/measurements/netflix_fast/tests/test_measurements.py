@@ -306,7 +306,9 @@ class NetflixResultTestCase(TestCase):
         x = nft._manage_threads(conns)
         assert x["reason_terminated"] == "result_stabilised"
 
-    @mock.patch("netmeasure.measurements.latency.measurements.LatencyMeasurement.measure")
+    @mock.patch(
+        "netmeasure.measurements.latency.measurements.LatencyMeasurement.measure"
+    )
     def test_latency_result(self, mock_latency_measure):
         mock_latency_result = LatencyMeasurementResult(
             id=("1"),

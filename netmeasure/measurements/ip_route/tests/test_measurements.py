@@ -1,7 +1,10 @@
 import socket
 from unittest import TestCase, mock
 
-from netmeasure.measurements.ip_route.measurements import IPRouteMeasurement, ROUTE_ERRORS
+from netmeasure.measurements.ip_route.measurements import (
+    IPRouteMeasurement,
+    ROUTE_ERRORS,
+)
 from netmeasure.measurements.latency.measurements import LatencyMeasurement
 from netmeasure.measurements.ip_route.results import IPRouteMeasurementResult
 from netmeasure.measurements.latency.results import LatencyMeasurementResult

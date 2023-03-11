@@ -7,7 +7,9 @@ from netmeasure.measurements.speedtest_dotnet.measurements import (
     SpeedtestDotnetMeasurement,
     SPEEDTEST_ERRORS,
 )
-from netmeasure.measurements.speedtest_dotnet.results import SpeedtestDotnetMeasurementResult
+from netmeasure.measurements.speedtest_dotnet.results import (
+    SpeedtestDotnetMeasurementResult,
+)
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
 

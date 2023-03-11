@@ -7,10 +7,14 @@ import subprocess
 
 from netmeasure.measurements.latency.measurements import LatencyMeasurement
 from netmeasure.measurements.base.results import Error
-from netmeasure.measurements.webpage_download.measurements import WebpageDownloadMeasurement
+from netmeasure.measurements.webpage_download.measurements import (
+    WebpageDownloadMeasurement,
+)
 from netmeasure.measurements.webpage_download.measurements import WEB_ERRORS
 
-from netmeasure.measurements.webpage_download.results import WebpageDownloadMeasurementResult
+from netmeasure.measurements.webpage_download.results import (
+    WebpageDownloadMeasurementResult,
+)
 from netmeasure.measurements.latency.results import LatencyMeasurementResult
 
 from netmeasure.units import NetworkUnit, StorageUnit, TimeUnit, RatioUnit

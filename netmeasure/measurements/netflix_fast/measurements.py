@@ -66,7 +66,7 @@ class NetflixFastMeasurement(BaseMeasurement):
         urlcount=3,
         max_time_seconds=30,
         sleep_seconds=0.2,
-        chunk_size=64 * 2 ** 10,
+        chunk_size=64 * 2**10,
         terminate_on_thread_complete=True,
         terminate_on_result_stable=False,
     ):

@@ -12,7 +12,9 @@ from validators import ValidationFailure
 from netmeasure.measurements.base.measurements import BaseMeasurement
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
-from netmeasure.measurements.youtube_download.results import YoutubeDownloadMeasurementResult
+from netmeasure.measurements.youtube_download.results import (
+    YoutubeDownloadMeasurementResult,
+)
 
 YOUTUBE_ERRORS = {
     "youtube-download": "Download utility could not download file",
@@ -55,9 +57,13 @@ class YoutubeDownloadMeasurement(BaseMeasurement):
         try:
             ydl.extract_info(url)
         except yt_dlp.utils.ExtractorError as e:
-            return self._get_youtube_download_error("youtube-extractor", traceback=str(e))
+            return self._get_youtube_download_error(
+                "youtube-extractor", traceback=str(e)
+            )
         except yt_dlp.utils.DownloadError as e:
-            return self._get_youtube_download_error("youtube-download", traceback=str(e))
+            return self._get_youtube_download_error(
+                "youtube-download", traceback=str(e)
+            )
         try:
             # Extract size and duration from final progress step
             download_size = self.progress_dicts[-1]["total_bytes"]
@@ -78,7 +84,9 @@ class YoutubeDownloadMeasurement(BaseMeasurement):
             # Remove the created temp directory and all contents
             shutil.rmtree(file_dir)
         except FileNotFoundError as e:
-            return self._get_youtube_download_error("youtube-no_directory", traceback=str(e))
+            return self._get_youtube_download_error(
+                "youtube-no_directory", traceback=str(e)
+            )
 
         return YoutubeDownloadMeasurementResult(
             id=self.id,

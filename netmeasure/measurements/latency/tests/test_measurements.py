@@ -1,7 +1,10 @@
 import subprocess
 from unittest import TestCase, mock
 
-from netmeasure.measurements.latency.measurements import LatencyMeasurement, LATENCY_ERRORS
+from netmeasure.measurements.latency.measurements import (
+    LatencyMeasurement,
+    LATENCY_ERRORS,
+)
 from netmeasure.measurements.latency.results import (
     LatencyMeasurementResult,
     LatencyIndividualMeasurementResult,

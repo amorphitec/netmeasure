@@ -25,7 +25,7 @@ import typing
 from netmeasure.measurements.base.results import MeasurementResult
 
 
-class BaseMeasurement():
+class BaseMeasurement:
     """Interface for creating measurements.
 
     This base class is designed to be sub-classed and used as an

@@ -7,7 +7,9 @@ from bs4 import BeautifulSoup
 from netmeasure.measurements.base.measurements import BaseMeasurement
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
-from netmeasure.measurements.webpage_download.results import WebpageDownloadMeasurementResult
+from netmeasure.measurements.webpage_download.results import (
+    WebpageDownloadMeasurementResult,
+)
 from netmeasure.measurements.latency.measurements import LatencyMeasurement
 
 

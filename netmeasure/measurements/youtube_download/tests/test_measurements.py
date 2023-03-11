@@ -4,8 +4,13 @@ from unittest import TestCase, mock
 
 import yt_dlp
 
-from netmeasure.measurements.youtube_download.measurements import YoutubeDownloadMeasurement, YOUTUBE_ERRORS
-from netmeasure.measurements.youtube_download.results import YoutubeDownloadMeasurementResult
+from netmeasure.measurements.youtube_download.measurements import (
+    YoutubeDownloadMeasurement,
+    YOUTUBE_ERRORS,
+)
+from netmeasure.measurements.youtube_download.results import (
+    YoutubeDownloadMeasurementResult,
+)
 from netmeasure.measurements.latency.results import LatencyMeasurementResult
 from netmeasure.measurements.base.results import Error
 from netmeasure.units import RatioUnit, TimeUnit, StorageUnit, NetworkUnit
@@ -134,7 +139,7 @@ class YoutubeDownloadResultTestCase(TestCase):
                 Error(
                     key="youtube-extractor",
                     description=YOUTUBE_ERRORS.get("youtube-extractor", ""),
-                    traceback="Extraction failed!; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U"
+                    traceback="Extraction failed!; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U",
                 )
             ],
         )
@@ -275,7 +280,8 @@ class YoutubeDownloadResultTestCase(TestCase):
         mock_remove.side_effect = [0]
         mock_rmtree.side_effect = [0]
         self.assertEqual(
-            self.ytm._get_youtube_download_result(self.test_url), self.mock_valid_youtube_download_result
+            self.ytm._get_youtube_download_result(self.test_url),
+            self.mock_valid_youtube_download_result,
         )
 
     @mock.patch("shutil.rmtree")
@@ -295,8 +301,8 @@ class YoutubeDownloadResultTestCase(TestCase):
         mock_remove.side_effect = [0]
         mock_rmtree.side_effect = [0]
 
-        #print(self.ytm._get_youtube_download_result(self.test_url))
-        #print(self.mock_extraction_fail_result)
+        # print(self.ytm._get_youtube_download_result(self.test_url))
+        # print(self.mock_extraction_fail_result)
 
         self.assertEqual(
             self.ytm._get_youtube_download_result(self.test_url),
@@ -320,7 +326,8 @@ class YoutubeDownloadResultTestCase(TestCase):
         mock_remove.side_effect = [0]
         mock_rmtree.side_effect = [0]
         self.assertEqual(
-            self.ytm._get_youtube_download_result(self.test_url), self.mock_download_fail_result
+            self.ytm._get_youtube_download_result(self.test_url),
+            self.mock_download_fail_result,
         )
 
     @mock.patch("shutil.rmtree")
@@ -357,7 +364,8 @@ class YoutubeDownloadResultTestCase(TestCase):
         mock_remove.side_effect = [0]
         mock_rmtree.side_effect = [0]
         self.assertEqual(
-            self.ytm._get_youtube_download_result(self.test_url), self.mock_final_only_result
+            self.ytm._get_youtube_download_result(self.test_url),
+            self.mock_final_only_result,
         )
 
     # NOTE: OUTDATED

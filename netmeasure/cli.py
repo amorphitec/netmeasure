@@ -136,7 +136,12 @@ def perform_ip_route_measurement(host):
     "-h", "--host", required=True, multiple=False, help="Host to measure latency to"
 )
 @click.option(
-    "-c", "--count", default=3, required=False, multiple=False, help="Count of pings to send"
+    "-c",
+    "--count",
+    default=3,
+    required=False,
+    multiple=False,
+    help="Count of pings to send",
 )
 def perform_latency_measurement(host, count):
     """
@@ -239,7 +244,7 @@ def perform_speedtest_dotnet_measurement():
         for error in result.errors:
             console.print(f"[error]Error:[/error] {error.description}")
             return ExitStatus.failure
-    output = ( 
+    output = (
         f"[header]:zap: Speedtest Dotnet :zap:[/header]\n"
         f"Host: [endpoint]{result.server_host}[/endpoint] | "
         f"Name: [value]{result.server_name}[/value] | "
