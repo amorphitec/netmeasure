@@ -1,5 +1,10 @@
 ## Unreleased
 
+## [1.2.1] (2022-03-11)
+
+### Fixed
+- README badges
+
 ## [1.2.0] (2022-03-11)
 
 ### Added
