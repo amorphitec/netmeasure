@@ -3,6 +3,7 @@
 ### Added
 
 - Add demonstration video to README
+- Add usage instructions to README
 
 ### Fixed
 
