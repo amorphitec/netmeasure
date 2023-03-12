@@ -169,7 +169,7 @@ def perform_latency_measurement(host, count):
             f"Host: [endpoint]{result.host}[/endpoint]\n"
             f"Minimum Latency: [value]{result.minimum_latency}[/value] [unit]{result.elapsed_time_unit.value}[/unit] | "
             f"Average Latency: [value]{result.average_latency}[/value] [unit]{result.elapsed_time_unit.value}[/unit] | "
-            f"Maximum Latency: [value]{result.maximum_latency}[/value] [unit]{result.elapsed_time_unit.value}[/unit] |"
+            f"Maximum Latency: [value]{result.maximum_latency}[/value] [unit]{result.elapsed_time_unit.value}[/unit] | "
             f"Median Deviation: [value]{result.median_deviation}[/value] [unit]{result.elapsed_time_unit.value}[/unit]\n"
             f"Packets Transmitted: [value]{result.packets_transmitted}[/value] | "
             f"Packets Received: [value]{result.packets_transmitted}[/value] | "
