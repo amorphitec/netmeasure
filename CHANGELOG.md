@@ -1,8 +1,13 @@
 ## Unreleased
 
+### Fixed
+
+- Fix missing error tag in latency cli
+
 ## [1.2.4] (2022-03-11)
 
 ### Fixed
+
 - Update poetry-publish to fix broken pypi publish workflow
 
 ## [1.2.3] (2022-03-11)

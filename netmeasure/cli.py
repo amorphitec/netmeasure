@@ -163,7 +163,7 @@ def perform_latency_measurement(host, count):
     for result in [r for r in results if type(r) == LatencyMeasurementResult]:
         if len(result.errors) > 0:
             for error in result.errors:
-                console.print(f"[]Error:[/error] {error.description}")
+                console.print(f"[error]Error:[/error] {error.description}")
                 return ExitStatus.failure
         output += (
             f"Host: [endpoint]{result.host}[/endpoint]\n"
