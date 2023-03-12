@@ -7,6 +7,8 @@
 
 A library for measuring Internet connection quality in a structured and consistent way.
 
+[![asciinema_netmeasure_v1.2.5](https://asciinema.org/a/rHagzsiXoDxxyBtkdTV77chta.svg)](https://asciinema.org/a/rHagzsiXoDxxyBtkdTV77chta)
+
 ## Purpose
 
 There are a variety of services, clients, tools, and methodologies used to measure Internet connection quality. Each of these has its own advantages, flaws, biases and units of measurement.
