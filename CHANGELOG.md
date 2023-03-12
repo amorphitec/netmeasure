@@ -1,5 +1,7 @@
 ## Unreleased
 
+## [1.2.5] (2022-03-12)
+
 ### Fixed
 
 - Fix missing error tag in latency cli
