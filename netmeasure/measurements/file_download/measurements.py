@@ -161,7 +161,7 @@ class FileDownloadMeasurement(BaseMeasurement):
             download_rate_unit=download_rate_unit,
             download_rate=download_rate,
             download_size=download_size,
-            download_size_unit=StorageUnit.bit,
+            download_size_unit=StorageUnit.byte,
             errors=[],
         )
 

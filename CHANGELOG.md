@@ -8,6 +8,7 @@
 ### Fixed
 
 - Fix missing space in latency cli output
+- Fix incorrect download size units in download measurement
 
 ## [1.2.5] (2022-03-12)
 
