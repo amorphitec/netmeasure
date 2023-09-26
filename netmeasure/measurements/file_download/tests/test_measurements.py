@@ -66,7 +66,7 @@ class FileDownloadMeasurementWgetTestCase(TestCase):
             download_rate_unit=NetworkUnit("Kibit/s"),
             download_rate=133.6,
             download_size=11376,
-            download_size_unit=StorageUnit.bit,
+            download_size_unit=StorageUnit.byte,
             errors=[],
         )
         self.valid_wget_mibit_sec = FileDownloadMeasurementResult(
@@ -75,7 +75,7 @@ class FileDownloadMeasurementWgetTestCase(TestCase):
             download_rate_unit=NetworkUnit("Mibit/s"),
             download_rate=133.6,
             download_size=11376,
-            download_size_unit=StorageUnit.bit,
+            download_size_unit=StorageUnit.byte,
             errors=[],
         )
         self.invalid_wget_mibit_sec = FileDownloadMeasurementResult(
