@@ -1,5 +1,7 @@
 ## Unreleased
 
+## [1.2.6] (2023-09-26)
+
 ### Added
 
 - Add demonstration video to README
