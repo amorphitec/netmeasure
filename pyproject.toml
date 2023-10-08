@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "netmeasure"
-version = "1.3.0"
+version = "1.3.1"
 description = "Measure Internet connection quality."
 authors = [
     "James Stewart <james@amorphitec.io>",
