@@ -305,7 +305,8 @@ def perform_webpage_download_measurement(url):
     multiple=False,
     help="URL of YouTube video to download",
 )
-def perform_youtube_download_measurement(url):
+@click.option("-r", "--rate-limit", required=True, multiple=False, type=click.INT, help="Download rate limit (bit/s)")
+def perform_youtube_download_measurement(url, rate_limit):
     """
     Perform a youtube download measurement.
     """
@@ -314,6 +315,7 @@ def perform_youtube_download_measurement(url):
         measurement = YoutubeDownloadMeasurement(
             id=get_uuid_str(),
             url=url,
+            rate_limit=rate_limit,
         )
     except ValueError as err:
         raise click.BadParameter(err)

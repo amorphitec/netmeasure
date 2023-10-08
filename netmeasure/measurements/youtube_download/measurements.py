@@ -6,6 +6,7 @@ import os
 import shutil
 
 import yt_dlp
+from yt_dlp.downloader.http import HttpFD
 import validators
 from validators import ValidationFailure
 
@@ -29,13 +30,14 @@ YOUTUBE_ERRORS = {
 
 
 class YoutubeDownloadMeasurement(BaseMeasurement):
-    def __init__(self, id, url):
+    def __init__(self, id, url, rate_limit=None):
         super(YoutubeDownloadMeasurement, self).__init__(id=id)
         validated_url = validators.url(url)
         if isinstance(validated_url, ValidationFailure):
             raise ValueError("`{url}` is not a valid url".format(url=url))
         self.id = id
         self.url = url
+        self.rate_limit = rate_limit
         self.progress_dicts = []
 
     def measure(self):
@@ -53,13 +55,11 @@ class YoutubeDownloadMeasurement(BaseMeasurement):
             "progress_hooks": [self._store_progress_dicts_hook],
             "outtmpl": filename,
         }
+        if self.rate_limit != None:
+            params["ratelimit"] = self.rate_limit
         ydl = yt_dlp.YoutubeDL(params=params)
         try:
-            ydl.extract_info(url)
-        except yt_dlp.utils.ExtractorError as e:
-            return self._get_youtube_download_error(
-                "youtube-extractor", traceback=str(e)
-            )
+            ydl.download(url)
         except yt_dlp.utils.DownloadError as e:
             return self._get_youtube_download_error(
                 "youtube-download", traceback=str(e)

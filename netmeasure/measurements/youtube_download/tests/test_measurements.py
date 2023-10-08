@@ -126,23 +126,6 @@ class YoutubeDownloadResultTestCase(TestCase):
             elapsed_time_unit=TimeUnit("s"),
             errors=[],
         )
-        self.mock_extraction_fail_result = YoutubeDownloadMeasurementResult(
-            id=self.id,
-            url=self.test_url,
-            download_rate=None,
-            download_rate_unit=None,
-            download_size=None,
-            download_size_unit=None,
-            elapsed_time=None,
-            elapsed_time_unit=None,
-            errors=[
-                Error(
-                    key="youtube-extractor",
-                    description=YOUTUBE_ERRORS.get("youtube-extractor", ""),
-                    traceback="Extraction failed!; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U",
-                )
-            ],
-        )
         self.mock_download_fail_result = YoutubeDownloadMeasurementResult(
             id=self.id,
             url=self.test_url,
@@ -288,37 +271,12 @@ class YoutubeDownloadResultTestCase(TestCase):
     @mock.patch("os.remove")
     @mock.patch("os.rmdir")
     @mock.patch.object(yt_dlp, "YoutubeDL")
-    def test_youtube_download_result_extraction_error(
-        self, mock_YoutubeDL, mock_rmdir, mock_remove, mock_rmtree
-    ):
-        self.ytm.progress_dicts = self.mock_progress_dicts
-        mock_ydl = mock.MagicMock()
-        mock_ydl.extract_info.side_effect = [
-            yt_dlp.utils.ExtractorError("Extraction failed!")
-        ]
-        mock_YoutubeDL.return_value = mock_ydl
-        mock_rmdir.side_effect = [0]
-        mock_remove.side_effect = [0]
-        mock_rmtree.side_effect = [0]
-
-        # print(self.ytm._get_youtube_download_result(self.test_url))
-        # print(self.mock_extraction_fail_result)
-
-        self.assertEqual(
-            self.ytm._get_youtube_download_result(self.test_url),
-            self.mock_extraction_fail_result,
-        )
-
-    @mock.patch("shutil.rmtree")
-    @mock.patch("os.remove")
-    @mock.patch("os.rmdir")
-    @mock.patch.object(yt_dlp, "YoutubeDL")
     def test_youtube_download_result_download_error(
         self, mock_YoutubeDL, mock_rmdir, mock_remove, mock_rmtree
     ):
         self.ytm.progress_dicts = self.mock_progress_dicts
         mock_ydl = mock.MagicMock()
-        mock_ydl.extract_info.side_effect = [
+        mock_ydl.download.side_effect = [
             yt_dlp.utils.DownloadError("Download failed!")
         ]
         mock_YoutubeDL.return_value = mock_ydl
