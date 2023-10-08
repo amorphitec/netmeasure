@@ -30,7 +30,7 @@ YOUTUBE_ERRORS = {
 
 
 class YoutubeDownloadMeasurement(BaseMeasurement):
-    def __init__(self, id, url, rate_limit=None):
+    def __init__(self, id, url, rate_limit=0):
         super(YoutubeDownloadMeasurement, self).__init__(id=id)
         validated_url = validators.url(url)
         if isinstance(validated_url, ValidationFailure):
@@ -55,7 +55,7 @@ class YoutubeDownloadMeasurement(BaseMeasurement):
             "progress_hooks": [self._store_progress_dicts_hook],
             "outtmpl": filename,
         }
-        if self.rate_limit != None:
+        if self.rate_limit != 0:
             params["ratelimit"] = self.rate_limit
         ydl = yt_dlp.YoutubeDL(params=params)
         try:
