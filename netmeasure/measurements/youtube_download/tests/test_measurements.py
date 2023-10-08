@@ -276,9 +276,7 @@ class YoutubeDownloadResultTestCase(TestCase):
     ):
         self.ytm.progress_dicts = self.mock_progress_dicts
         mock_ydl = mock.MagicMock()
-        mock_ydl.download.side_effect = [
-            yt_dlp.utils.DownloadError("Download failed!")
-        ]
+        mock_ydl.download.side_effect = [yt_dlp.utils.DownloadError("Download failed!")]
         mock_YoutubeDL.return_value = mock_ydl
         mock_rmdir.side_effect = [0]
         mock_remove.side_effect = [0]

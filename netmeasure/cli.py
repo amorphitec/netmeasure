@@ -305,7 +305,14 @@ def perform_webpage_download_measurement(url):
     multiple=False,
     help="URL of YouTube video to download",
 )
-@click.option("-r", "--rate-limit", required=True, multiple=False, type=click.INT, help="Download rate limit (bit/s)")
+@click.option(
+    "-r",
+    "--rate-limit",
+    required=True,
+    multiple=False,
+    type=click.INT,
+    help="Download rate limit (bit/s)",
+)
 def perform_youtube_download_measurement(url, rate_limit):
     """
     Perform a youtube download measurement.
