@@ -308,10 +308,10 @@ def perform_webpage_download_measurement(url):
 @click.option(
     "-r",
     "--rate-limit",
-    required=True,
+    required=False,
     multiple=False,
     type=click.INT,
-    help="Download rate limit (bit/s)",
+    help="Download rate limit (Bytes/s)",
 )
 def perform_youtube_download_measurement(url, rate_limit):
     """
