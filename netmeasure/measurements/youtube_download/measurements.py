@@ -44,16 +44,12 @@ class YoutubeDownloadMeasurement(BaseMeasurement):
         return self._get_youtube_download_result(self.url)
 
     def _get_youtube_download_result(self, url):
-        # Unique filename from process ID and timestamp
-        file_dir = "{}/youtube-dl_{}".format(tempfile.gettempdir(), os.getpid())
-        filename = "{}/youtube-dl_{}/{}".format(
-            tempfile.gettempdir(), os.getpid(), int(time.time())
-        )
         params = {
             "quiet": True,
             "no_progress": True,
             "progress_hooks": [self._store_progress_dicts_hook],
-            "outtmpl": filename,
+            "format": "best",
+            "outtmpl": os.devnull,
         }
         if self.rate_limit != 0:
             params["ratelimit"] = self.rate_limit
@@ -79,15 +75,6 @@ class YoutubeDownloadMeasurement(BaseMeasurement):
             return self._get_youtube_download_error(
                 "youtube-progress_length", traceback=str(self.progress_dicts)
             )
-
-        try:
-            # Remove the created temp directory and all contents
-            shutil.rmtree(file_dir)
-        except FileNotFoundError as e:
-            return self._get_youtube_download_error(
-                "youtube-no_directory", traceback=str(e)
-            )
-
         return YoutubeDownloadMeasurementResult(
             id=self.id,
             url=self.url,
