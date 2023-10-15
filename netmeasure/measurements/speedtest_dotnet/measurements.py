@@ -27,9 +27,11 @@ class SpeedtestDotnetMeasurement(BaseMeasurement):
         self.id = id
         self.servers = servers
 
-    def measure(self, share=False):
+    def measure(self, share=False, upload=True, download=True):
         """
-        @params share: Boolean determining whether to generate a PNG on speedtest.net displaying the result of the test.
+        param share: Boolean determining whether to generate a PNG on speedtest.net displaying the result of the test.
+        param upload: Perform upload test.
+        param download: Perform download test.
         """
         try:
             s = speedtest.Speedtest()
@@ -42,10 +44,10 @@ class SpeedtestDotnetMeasurement(BaseMeasurement):
             s.get_best_server()
         except speedtest.SpeedtestBestServerFailure as e:
             return self._get_speedtest_error("speedtest-best-server", traceback=str(e))
-
-        s.download()
-        s.upload()
-
+        if upload:
+            s.upload()
+        if download:
+            s.download()
         if share:
             try:
                 s.results.share()
@@ -62,6 +64,8 @@ class SpeedtestDotnetMeasurement(BaseMeasurement):
                 upload_rate_unit=NetworkUnit("bit/s"),
                 data_received=(results_dict["bytes_received"]),
                 data_received_unit=StorageUnit("B"),
+                data_sent=(results_dict["bytes_sent"]),
+                data_sent_unit=StorageUnit("B"),
                 latency=float(results_dict["ping"]),
                 server_name=results_dict["server"]["name"],
                 server_id=results_dict["server"]["id"],
@@ -81,6 +85,8 @@ class SpeedtestDotnetMeasurement(BaseMeasurement):
             upload_rate_unit=None,
             data_received=None,
             data_received_unit=None,
+            data_sent=None,
+            data_sent_unit=None,
             latency=None,
             server_name=None,
             server_id=None,
